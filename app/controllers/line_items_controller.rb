@@ -11,7 +11,7 @@ class LineItemsController < ApplicationController
       :quantity => 1
       )
 
-    redirect_to store_path
+    redirect_to store_path, alert: "Added Item to Cart!"
   end
 
 end
