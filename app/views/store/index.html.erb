@@ -7,10 +7,12 @@
 <% end %>
 
 <% @items.each do |item| %>
+<% if item.inventory > 0 %>
 <tr>
 <td><h2><%= item.title %></h2></td>
-<td><h2>$ <%= item.price %></h2></td>
+<td><h2>$<%= (item.price.to_f/100) %></h2></td>
 <td><h2><%= item.inventory %></h2></td>
+<% end %>
 
 <% if user_signed_in? %>
 <td><%= button_to 'Add to Cart', line_items_path(item_id: item) %></td>

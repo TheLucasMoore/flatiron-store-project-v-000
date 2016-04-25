@@ -5,18 +5,21 @@ class Cart < ActiveRecord::Base
   
   def total
     total = 0
-
-    self.line_items.each do |item|
-      item_price = Item.find_by(:id => item.item_id)
-      total = (item_price.price * item.quantity) + total
+    self.line_items.each do |one_item|
+      total += (one_item.item.price * one_item.quantity)
     end
-
-    total
+    return total
   end
 
-  def add_to_cart
-    self << line_items
-  end
+def add_item(item_id)
+     line_item = self.line_items.find_by(item_id: item_id) 
+     if line_item 
+       line_item.quantity += 1
+     else
+        line_item = self.line_items.build(item_id: item_id)
+     end
+    line_item
+   end
 
   def checkout
     self.status = "submitted"

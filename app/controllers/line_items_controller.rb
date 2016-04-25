@@ -5,13 +5,14 @@ class LineItemsController < ApplicationController
 
   def create
     initialize_cart
-    @line_item = LineItem.create(
-      :item_id => params[:item_id],
-      :cart_id => @cart.id,
-      :quantity => 1
-      )
-
-    redirect_to store_path, alert: "Added Item to Cart!"
+    item = Item.find(params[:item_id])
+    @line_item = current_cart.add_item(item.id)
+    
+    if @line_item.save
+      redirect_to cart_path(current_cart), alert: "Added Item to Cart!"
+    else 
+      redirect_to store_path, alert: "Error Adding Item."
+    end
   end
 
 end
