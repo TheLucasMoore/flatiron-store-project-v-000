@@ -17,7 +17,7 @@
   <li><%= link_to "Sign In", new_user_session_path %></li>
   <% end %>
 
-  <% if !!current_cart %>
+  <% if @cart %>
   <li> <%= link_to "Cart", cart_path(current_cart), class: "navbar-brand" %></li>
   <% end %>
 </ul>

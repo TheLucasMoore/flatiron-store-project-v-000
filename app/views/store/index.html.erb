@@ -12,7 +12,7 @@
 <td><h2>$ <%= item.price %></h2></td>
 <td><h2><%= item.inventory %></h2></td>
 
-<% if user_signed_in? && !current_cart %>
+<% if user_signed_in? && @cart %>
 <td><%= button_to 'Add to Cart', line_items_path(item_id: item) %></td>
 <% end %>
 </tr>
